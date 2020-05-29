@@ -1,0 +1,77 @@
+# common.lib
+#
+# Modified: 24-05-2020
+
+# Essential files
+ESSFILE="run.sh nightrun.sh common.lib climyid.sh"
+
+DEF="\e[0m"
+ULINE="\e[4m"
+CDEF="\e[39m"
+LCYAN="\e[96m"
+LGREN="\e[92m"
+LRED="\e[91m"
+INV="\e[7m"
+BOLD="\e[1m"
+
+
+# single line break
+function fnewL() {
+    printf "\n"
+}
+
+# double line break
+function fnewLL() {
+    printf "\n\n"
+}
+
+# logo
+function flogo() {
+    printf "\n${LGREN}"
+    printf "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄" && fnewL
+    printf "██ ▄▄▀██ ████▄ ▄██ ▄▀▄ ██ ███ █▄ ▄██ ▄▄▀██" && fnewL
+    printf "██ █████ █████ ███ █ █ ██▄▀▀▀▄██ ███ ██ ██" && fnewL
+    printf "██ ▀▀▄██ ▀▀ █▀ ▀██ ███ ████ ███▀ ▀██ ▀▀ ██" && fnewL
+    printf "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀" && printf "${CDEF}\n\n"
+}
+
+# wget from url
+function fwget() {
+    sudo wget -q https://cli.my.id/$1
+}
+
+# not supported message
+function fnosupport() {
+    echo -e "${LRED}Sorry, your Distro is not supported yet. Exiting now.${CDEF}"
+}
+
+# bye message
+function fbye() {
+    echo -e "${LCYAN}See you later.${CDEF}"
+}
+
+# make file executable
+function fchmodx() {
+    sudo chmod +x $1
+}
+
+# finished operation message
+function fdone() {
+    echo -e "${LGREN}✔  ${ULINE}ALL DONE.${DEF}${CDEF}"
+}
+
+# remove THIS file
+function frmfile() {
+    rm -fR $FILE
+}
+
+# remove all downloaded CLIMYID files
+function frmall() {
+    rm -fR $FILE $ESSFILE
+}
+
+# distro name detection
+function catdistro() {
+    CATOS=$(sudo cat /etc/os-release | grep -w ID | cut -d '=' -f 2)
+    CATOSx=$(sudo cat /etc/os-release | grep -w ID | cut -d '"' -f 2)
+}
