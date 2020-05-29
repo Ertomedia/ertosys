@@ -10,6 +10,11 @@ CLIMYID is a simple CLI tool for your server.
 - [x] Install Docker Engine (CentOS, Debian, Ubuntu)
 - [ ] Install LAMP stack (Apache, MySQL, PHP 7x) + Fail2ban
 
+## How to use
+```bash
+wget -q https://cli.my.id/run.sh && bash run.sh
+```
+
 ## Live site
 https://cli.my.id
 
