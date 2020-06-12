@@ -8,6 +8,7 @@ CLIMYID is a simple CLI tool for your server.
 - [x] Update Linux machine (Kali, CentOS, Debian, Ubuntu)
 - [x] Install LEMP stack (Nginx, MySQL, PHP 7x) + Fail2ban (Debian, Ubuntu)
 - [x] Install Docker Engine (CentOS, Debian, Ubuntu)
+- [x] Install Node.js Stack (Node.js + NPM + NGINX) + Fail2ban (CentOS, Debian, Ubuntu)
 - [ ] Install LAMP stack (Apache, MySQL, PHP 7x) + Fail2ban
 
 ## How to use
@@ -28,6 +29,14 @@ URL | Package | Powered by
  https://cli.erto.co | Nightly | [Firebase](https://climyid.web.app/)
 
 ## Changelog
+
+Version 0.6:
+* [NEW] Install Node.js Stack (Node.js + NPM + NGINX) + Fail2ban
+* [NEW] Check IP Whois
+* [NEW] Check Website Header
+* [NEW] Check RAM allocation
+* [NEW] Install Stackdriver Logging & Monitoring
+* [FIX] Code optimization.
 
 Version 0.5:
 * [NEW] Install WireGuard VPN. Credits to [Nyr](https://github.com/Nyr/wireguard-install).
