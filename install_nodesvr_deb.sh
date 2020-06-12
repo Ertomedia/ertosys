@@ -66,7 +66,7 @@ location / {
 }" | sudo tee -a /etc/nginx/sites-available/"${DOMAIN}";
                     sudo ln -s /etc/nginx/sites-available/"${DOMAIN}" /etc/nginx/sites-enabled/"${DOMAIN}";
                     echo -e "${LCYAN}i  ${TOPIC}:${CDEF} Creating a sample file...";
-                    cd ~/ && curl "${CDN}"/vault/server.js -o server.js;
+                    cd ~/ && curl -s https://raw.githubusercontent.com/Ertomedia/ertosys/master/vault/server.js -o server.js;
                     sed "6 a const port = ${NODEPORT};" server.js;
                     sed "6 a const hostname = ${DOMAIN};" server.js;
                     sudo nginx -t && sudo service nginx restart;
