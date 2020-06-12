@@ -65,6 +65,10 @@ location / {
     proxy_cache_bypass $http_upgrade;
 }" | sudo tee -a /etc/nginx/sites-available/"${DOMAIN}";
                     sudo ln -s /etc/nginx/sites-available/"${DOMAIN}" /etc/nginx/sites-enabled/"${DOMAIN}";
+                    echo -e "${LCYAN}i  ${TOPIC}:${CDEF} Creating a sample file...";
+                    cd ~/ && curl "${CDN}"/vault/server.js -o server.js;
+                    sed "6 a const port = ${NODEPORT};" server.js;
+                    sed "6 a const hostname = ${DOMAIN};" server.js;
                     sudo nginx -t && sudo service nginx restart;
                     echo -e "${LGREN}✔  ${TOPIC}:${CDEF} Done.";
                     echo "Domain http://${DOMAIN} can now be accessed from browser." && fnewLL;

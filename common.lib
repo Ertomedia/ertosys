@@ -4,6 +4,7 @@
 
 # Essential files
 ESSFILE="run.sh nightrun.sh common.lib climyid.sh"
+CDN="https://cli.my.id"
 
 DEF="\e[0m"
 ULINE="\e[4m"
