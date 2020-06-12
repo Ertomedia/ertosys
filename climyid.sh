@@ -8,7 +8,7 @@
 . common.lib
 
 clear
-VER="0.6alpha"
+VER="0.6"
 FILE="climyid.sh"
 DESC="A simple CLI tool for various sysadmin task."
 
@@ -26,13 +26,15 @@ function lemp_distro() {
 
     if test "$CATOS" = 'ubuntu'
     then
-        fwget "install_lemp_ubn.sh -O install_lemp_ubn.sh"
-        fchmodx "install_lemp_ubn.sh" && ./install_lemp_ubn.sh
+        FNAME="install_lemp_ubn.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
 
     elif test "$CATOS" = 'debian'
     then
-        fwget "install_lemp_deb.sh -O install_lemp_deb.sh" 
-        fchmodx "install_lemp_deb.sh" && ./install_lemp_deb.sh
+        FNAME="install_lemp_deb.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
 
     else
         fnewL
@@ -47,18 +49,50 @@ function docker_distro() {
 
     if test "$CATOS" = 'ubuntu'
     then
-        fwget "install_docker_ubn.sh -O install_docker_ubn.sh"
-        fchmodx "install_docker_ubn.sh" && ./install_docker_ubn.sh
+        FNAME="install_docker_ubn.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
 
     elif test "$CATOS" = 'debian'
     then
-        fwget "install_docker_deb.sh -O install_docker_deb.sh" 
-        fchmodx "install_docker_deb.sh" && ./install_docker_deb.sh
+        FNAME="install_docker_deb.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
 
     elif test "$CATOSx" = 'centos'
     then
-        fwget "install_docker_cent.sh -O install_docker_cent.sh" 
-        fchmodx "install_docker_cent.sh" && ./install_docker_cent.sh
+        FNAME="install_docker_cent.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
+
+    else
+        fnewL
+        fnosupport
+        fbye # Bye message from Cortana
+        frmall # remove all downloaded files
+    fi
+}
+
+function nodestack_distro() {
+    catdistro
+
+    if test "$CATOS" = 'ubuntu'
+    then
+        FNAME="install_nodesvr_ubn.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
+
+    elif test "$CATOS" = 'debian'
+    then
+        FNAME="install_nodesvr_deb.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
+
+    elif test "$CATOSx" = 'centos'
+    then
+        FNAME="install_nodesvr_cent.sh"
+        fwget "${FNAME} -O ${FNAME}"
+        fchmodx "${FNAME}" && ./${FNAME}
 
     else
         fnewL
@@ -72,6 +106,7 @@ echo "Hello, what do you want to do today?"
 select yn in "Update my Linux..."\
  "Install LEMP Stack"\
  "Install Docker"\
+ "Install Node.js Stack"\
  "Install Stackdriver Logging & Monitoring"\
  "Install WireGuard VPN (by Nyr)"\
  "Server Benchmark (YABS by masonr)"\
@@ -83,15 +118,18 @@ select yn in "Update my Linux..."\
  "Nevermind."; do
     case $yn in
         "Update my Linux..." ) 
-            FILE01="update.sh"
-            fwget "${FILE01} -O ${FILE01}"; # wget from url
-            fchmodx "${FILE01}" && ./${FILE01}; # make file executable and execute it
+            FUPDATE="update.sh"
+            fwget "${FUPDATE} -O ${FUPDATE}"; # wget from url
+            fchmodx "${FUPDATE}" && ./${FUPDATE}; # make file executable and execute it
             break;;
         "Install LEMP Stack..." ) 
             lemp_distro;
             break;;
         "Install Docker..." ) 
             docker_distro;
+            break;;
+        "Install Node.js Stack" ) 
+            nodestack_distro;
             break;;
         "Install Stackdriver Logging & Monitoring" )
             fnewL;
@@ -116,14 +154,14 @@ select yn in "Update my Linux..."\
             frmall && rm -fR yabs.sh ; # remove all downloaded CLIMYID files
             break;;
         "Update my Gitea..." ) 
-            FILE06="gitea_update.sh"
-            fwget "${FILE06} -O ${FILE06}"; # wget from url
-            fchmodx "${FILE06}" && ./${FILE06}; # make file executable and execute it
+            FGITEA="gitea_update.sh"
+            fwget "${FGITEA} -O ${FGITEA}"; # wget from url
+            fchmodx "${FGITEA}" && ./${FGITEA}; # make file executable and execute it
             break;;
         "Check IP Whois" )
-            FILE07="ipinfo.sh"
-            fwget "${FILE07} -O ${FILE07}"; 
-            fchmodx "${FILE07}" && ./${FILE07}; 
+            FWHOIS="ipinfo.sh"
+            fwget "${FWHOIS} -O ${FWHOIS}"; 
+            fchmodx "${FWHOIS}" && ./${FWHOIS}; 
             frmfile;
             break;;
         "Check RAM Allocation" ) 
@@ -140,7 +178,7 @@ select yn in "Update my Linux..."\
             break;;
         "Try CORTANA... (in Bahasa)" )
             frmall;
-            wget https://cortana.web.app/run.sh && bash run.sh;
+            wget https://erto.my.id/run.sh && bash run.sh;
             frmfile;  # remove THIS file
             break;;
         "Nevermind." )
