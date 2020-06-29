@@ -4,7 +4,7 @@
 # ver 0.1.1
 # Modified: 30-06-2020
 #
-# https://source.my.id/erol/climyid
+# https://github.com/Ertomedia/ertosys
 #
 # Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
@@ -46,7 +46,7 @@ autocheck() {
     
     else
         fnewL # single line break
-        echo "Unable to define your distro! Wanna try our supported update script close to your distro?"
+        echo "i  Unable to define your distro! Wanna try our supported update script close to your distro?"
         select yn in "CentOS..." "Debian..." "Ubuntu..." "Kali..." "NO (Back to Main)" "Exit"; do
             case $yn in
                 "CentOS..." ) 
@@ -86,5 +86,5 @@ autocheck() {
 }
 
 fnewL
-echo "» Okay, checking your distro version..."
+echo "i  Execute distro pre-check..."
 autocheck
