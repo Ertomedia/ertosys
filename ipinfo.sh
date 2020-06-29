@@ -1,11 +1,18 @@
 #!/bin/bash
-# Modified: 24-05-2020
+#
+# ipinfo.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
+#
+# Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 FILE="ipinfo.sh"
 
-read -rp "Enter IP Address: " IPNUM
+read -rp "»  Enter IP Address: " IPNUM
 
 function fcurlipinfo() {
     curl --silent --show-error https://ipinfo.io/${IPNUM} | grep "$1"
@@ -20,7 +27,7 @@ zone=$(fcurlipinfo "timezone" | fcutipinfo);
 lokasi=$(fcurlipinfo "loc" | fcutipinfo); 
 isp=$(fcurlipinfo "org" | fcutipinfo); 
 
-echo -e "Please select which data to display?"
+echo -e "»  Please select which data to display?"
 select yn in "City" "Country" "Timezone" "Location" "Provider" "All Data" "Exit"; do
     case $yn in
         "City" ) 
