@@ -67,8 +67,8 @@ location / {
                     sudo ln -s /etc/nginx/sites-available/"${DOMAIN}" /etc/nginx/sites-enabled/"${DOMAIN}";
                     echo -e "${LCYAN}i  ${TOPIC}:${CDEF} Creating a sample file...";
                     cd ~/ && curl -s https://raw.githubusercontent.com/Ertomedia/ertosys/master/vault/server.js -o server.js;
-                    sed "6 a const port = ${NODEPORT};" server.js;
-                    sed "6 a const hostname = ${DOMAIN};" server.js;
+                    sed -i "6 a const port = ${NODEPORT};" server.js;
+                    sed -i "6 a const hostname = ${DOMAIN};" server.js;
                     sudo nginx -t && sudo service nginx restart;
                     echo -e "${LGREN}✔  ${TOPIC}:${CDEF} Done.";
                     echo "Domain http://${DOMAIN} can now be accessed from browser." && fnewLL;
