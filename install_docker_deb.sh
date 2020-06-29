@@ -1,20 +1,27 @@
 #!/bin/bash
-# Modified: 24-05-2020
+#
+# install_docker_deb.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
+#
+# Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 FILE="install_docker_deb.sh"
 
 function oscheck() { # OS Check
-    catdistro
+    fchkdistro
 
-    if test "$CATOS" = 'debian'
+    if [ "$osdebn" = 'debian' ]
     then
-        echo "» Installing packages..."
+        echo "»  Installing packages..."
         sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
         curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
         sudo apt-key fingerprint 0EBFCD88 && fnewL
-        echo "» Set up the repository..." && fnewLL
+        echo "»  Set up the repository..." && fnewLL
         echo -e "${LCYAN}Choose our machine architecture?${CDEF}"
         select yn in "x86_64 / amd64" "armhf" "arm64" "Later"; do
             case $yn in
@@ -33,10 +40,10 @@ function oscheck() { # OS Check
                     exit;;
             esac
         done && fnewLL
-        echo "» Installing docker engine..."
+        echo "»  Installing docker engine..."
         sudo apt-get update
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io && fnewLL
-        echo "» Testing docker with hello-world..."
+        echo "»  Testing docker with hello-world..."
         sudo docker run hello-world
         fdone # finished operation message
         frmall # remove all downloaded CLIMYID files

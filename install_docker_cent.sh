@@ -1,22 +1,29 @@
 #!/bin/bash
-# Modified: 24-05-2020
+#
+# install_docker_cent.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
+#
+# Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 FILE="install_docker_cent.sh"
 
-function oscheck() { # OS Check
-    catdistro
+oscheck() { # OS Check
+    fchkdistro
 
-    if test "$CATOSx" = 'centos'
+    if [ "$osrhel" = 'centos' ]
     then
-        echo "» Installing packages..."
+        echo "»  Installing packages..."
         sudo yum install -y yum-utils
         sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && fnewL
-        echo "» Installing docker engine..."
+        echo "»  Installing docker engine..."
         sudo yum install -y docker-ce docker-ce-cli containerd.io
         sudo systemctl start docker && fnewLL
-        echo "» Testing docker with hello-world..."
+        echo "»  Testing docker with hello-world..."
         sudo docker run hello-world
         fdone # finished operation message
         frmall # remove all downloaded CLIMYID files
