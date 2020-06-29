@@ -1,14 +1,17 @@
 #!/bin/bash
-# Modified: 24-05-2020
 #
-# https://source.my.id/erol/climyid
+# climyid.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
 #
 # Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 clear
-VER="0.6"
+VER="0.6.1"
 FILE="climyid.sh"
 DESC="A simple CLI tool for various sysadmin task."
 
@@ -21,16 +24,16 @@ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -
 fnewLL
 ## End Header ##
 
-function lemp_distro() {
-    catdistro
+lemp_distro() {
+    fchkdistro
 
-    if test "$CATOS" = 'ubuntu'
+    if [ "$osdebn" = 'ubuntu' ]
     then
         FNAME="install_lemp_ubn.sh"
         fwget "${FNAME} -O ${FNAME}"
         fchmodx "${FNAME}" && ./${FNAME}
 
-    elif test "$CATOS" = 'debian'
+    elif [ "$osdebn" = 'debian' ]
     then
         FNAME="install_lemp_deb.sh"
         fwget "${FNAME} -O ${FNAME}"
@@ -44,22 +47,22 @@ function lemp_distro() {
     fi
 }
 
-function docker_distro() {
-    catdistro
+docker_distro() {
+    fchkdistro
 
-    if test "$CATOS" = 'ubuntu'
+    if [ "$osdebn" = 'ubuntu' ]
     then
         FNAME="install_docker_ubn.sh"
         fwget "${FNAME} -O ${FNAME}"
         fchmodx "${FNAME}" && ./${FNAME}
 
-    elif test "$CATOS" = 'debian'
+    elif [ "$osdebn" = 'debian' ]
     then
         FNAME="install_docker_deb.sh"
         fwget "${FNAME} -O ${FNAME}"
         fchmodx "${FNAME}" && ./${FNAME}
 
-    elif test "$CATOSx" = 'centos'
+    elif [ "$osrhel" = 'centos' ]
     then
         FNAME="install_docker_cent.sh"
         fwget "${FNAME} -O ${FNAME}"
@@ -73,22 +76,22 @@ function docker_distro() {
     fi
 }
 
-function nodestack_distro() {
-    catdistro
+nodestack_distro() {
+    fchkdistro
 
-    if test "$CATOS" = 'ubuntu'
+    if [ "$osdebn" = 'ubuntu' ]
     then
         FNAME="install_nodesvr_ubn.sh"
         fwget "${FNAME} -O ${FNAME}"
         fchmodx "${FNAME}" && ./${FNAME}
 
-    elif test "$CATOS" = 'debian'
+    elif [ "$osdebn" = 'debian' ]
     then
         FNAME="install_nodesvr_deb.sh"
         fwget "${FNAME} -O ${FNAME}"
         fchmodx "${FNAME}" && ./${FNAME}
 
-    elif test "$CATOSx" = 'centos'
+    elif [ "$osrhel" = 'centos' ]
     then
         FNAME="install_nodesvr_cent.sh"
         fwget "${FNAME} -O ${FNAME}"
