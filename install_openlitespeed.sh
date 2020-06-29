@@ -1,7 +1,10 @@
 #!/bin/bash
-# Modified: 24-05-2020
 #
-# https://source.my.id/erol/climyid
+# install_openlitespeed.sh
+# ver 0.1.1 (ALPHA)
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
 #
 # Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
