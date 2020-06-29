@@ -12,7 +12,7 @@
 
 FILE="install_docker_ubn.sh"
 
-function oscheck() { # OS Check
+oscheck() { # OS Check
     fchkdistro
 
     if [ "$osdebn" = 'ubuntu' ]

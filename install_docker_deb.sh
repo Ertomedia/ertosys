@@ -12,7 +12,7 @@
 
 FILE="install_docker_deb.sh"
 
-function oscheck() { # OS Check
+oscheck() { # OS Check
     fchkdistro
 
     if [ "$osdebn" = 'debian' ]
