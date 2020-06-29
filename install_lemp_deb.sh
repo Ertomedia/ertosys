@@ -1,14 +1,21 @@
 #!/bin/bash
-# Modified: 24-05-2020
+#
+# install_lemp_deb.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
+#
+# Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 FILE="install_lemp_deb.sh"
 
-function oscheck() { # OS Check
-    catdistro
+oscheck() { # OS Check
+    fchkdistro
 
-    if test "$CATOS" = 'debian'
+    if [ "$osdebn" = 'debian' ]
     then
         fnewL
         echo -e "${LCYAN}Things that will be installed in this LEMP Stack for Debian.${CDEF}"
@@ -97,7 +104,7 @@ function oscheck() { # OS Check
 
                     fi && fnewL;
                     # Status report
-                    let "RPT = $ERRN + $ERRF + $ERRS + $ERRP";
+                    (( RPT = ERRN + ERRF + ERRS + ERRP ));
                     if test "$RPT" == 0
                     then
                         fdone

@@ -1,14 +1,21 @@
 #!/bin/bash
-# Modified: 24-05-2020
+#
+# install_lemp_ubn.sh
+# ver 0.1.1
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
+#
+# Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
 . common.lib
 
 FILE="install_lemp_ubn.sh"
 
 function oscheck() { # OS Check
-    catdistro
+    fchkdistro
 
-    if test "$CATOS" = 'ubuntu'
+    if [ "$osdebn" = 'ubuntu' ]
     then
         fnewL
         echo -e "${LCYAN}Things that will be installed in this LEMP Stack for Ubuntu.${CDEF}"
@@ -100,7 +107,7 @@ function oscheck() { # OS Check
 
                     fi && fnewL;
                     # Status report
-                    let "RPT = $ERRN + $ERRF + $ERRS + $ERRP";
+                    (( RPT = ERRN + ERRF + ERRS + ERRP ));
                     if test "$RPT" == 0
                     then
                         fdone && fnewL
