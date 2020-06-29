@@ -1,6 +1,10 @@
 #!/bin/bash
 #
-# https://source.my.id/erol/climyid
+# install_caprover.sh
+# ver 0.1.1 (ALPHA)
+# Modified: 30-06-2020
+#
+# https://github.com/Ertomedia/ertosys
 #
 # Copyright (c) 2020 Erol Joudy. Released under the MIT License.
 
@@ -24,18 +28,18 @@ function oscheck() { # Detect OS
     #     os="fedora"
     #     os_version=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
     else
-        echo "Looks like you aren't running this installer on Ubuntu, Debian, or CentOS"
+        echo "${LCYAN}i${CDEF}  Looks like you aren't running this installer on Ubuntu"
         exit
     fi
     
     if [[ "$os" = "ubuntu" ]]
     then
         if [[ "$os_version" -lt 1604 ]]; then
-            echo "Ubuntu 16.04 or higher is required to use this installer
-        This version is too old and unsupported"
+            echo -e "${LCYAN}Ubuntu 16.04 or higher is required to use this installer
+        This version of Ubuntu is too old and unsupported. Exiting now.${CDEF}"
             exit
         fi
-        echo "» Configuring firewall..."
+        echo "»  Configuring firewall..."
         # Check UFW status
         UFW=$(sudo service ufw status | grep 'Active' | awk '{print $3}');
         if test "$UFW" = "(running)"
@@ -47,9 +51,9 @@ function oscheck() { # Detect OS
         fi
         ufw allow 80,443,3000,996,7946,4789,2377/tcp; ufw allow 7946,4789,2377/udp
         sudo systemctl enable ufw.service && sudo systemctl start ufw.service && fnewL
-        echo "» Installing CapRover..."
+        echo "»  Installing CapRover..."
         docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover && fnewL
-        echo "» Detecting NPM..."
+        echo "»  Detecting NPM..."
         # Check NPM status
         NPM=$(sudo service ufw status | grep 'Active' | awk '{print $3}')
         if test "$NPM" = "(running)"
